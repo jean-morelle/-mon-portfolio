@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jean-Morelle KOUDORO | Développeur Back-end .NET</title>
+    <meta name="description" content="Portfolio de Jean-Morelle KOUDORO, développeur back-end .NET (C#, ASP.NET Core, EF Core, PostgreSQL) basé au Togo. APIs REST, Clean Architecture, projets et CV." />
+    <meta property="og:title" content="Jean-Morelle KOUDORO | Développeur Back-end .NET" />
+    <meta property="og:description" content="APIs REST sécurisées avec C# et ASP.NET Core. Découvrez mes projets et téléchargez mon CV." />
+    <meta name="theme-color" content="#070b14" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script>
+      // applique le thème avant l'affichage pour éviter un flash de couleur
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light'
+      } catch {
+        document.documentElement.dataset.theme = 'light'
+      }
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
