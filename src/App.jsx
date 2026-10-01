@@ -26,14 +26,14 @@ const links = [
 ]
 
 const skills = [
-  { group: 'Langages', items: ['C#', 'PHP', 'TypeScript', 'JavaScript', 'Java', 'SQL'] },
+  { group: 'Langages', items: ['C#', 'PHP', 'TypeScript', 'JavaScript', 'SQL'] },
   {
     group: 'Back-end',
     items: ['ASP.NET Core Web API', 'EF Core', 'Laravel', 'MediatR', 'JWT', 'RBAC'],
   },
   { group: 'Architecture', items: ['Clean Architecture', 'Repository Pattern', 'REST', 'UML'] },
   { group: 'Données', items: ['PostgreSQL', 'MySQL', 'SQL Server'] },
-  { group: 'Front-end', items: ['React', 'Angular', 'Blade'] },
+  { group: 'Front-end', items: ['React', 'Blade'] },
   { group: 'Outils', items: ['Git', 'GitHub', 'Swagger', 'Visual Studio'] },
 ]
 
@@ -95,7 +95,7 @@ const services = [
   {
     icon: '⇄',
     title: 'Full-stack',
-    text: 'Applications complètes avec React ou Angular côté front, ASP.NET Core ou Laravel côté back.',
+    text: 'Applications complètes avec React côté front, ASP.NET Core ou Laravel côté back.',
   },
 ]
 

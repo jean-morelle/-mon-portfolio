@@ -5,7 +5,7 @@ Portfolio personnel de **Jean-Morelle KOUDORO**, développeur Full Stack spécia
 ## Contenu
 
 - **Accueil** : présentation, chiffres clés, téléchargement du CV
-- **À propos** et **Compétences** : C#, ASP.NET Core, EF Core, Laravel, PostgreSQL, MySQL, React, Angular…
+- **À propos** et **Compétences** : C#, ASP.NET Core, EF Core, Laravel, PostgreSQL, MySQL, React…
 - **Projets** :
   - [GKAS-GROUP](https://gkasgroup.com/) — site client en production (Laravel, MySQL)
   - [DigitalAllianceTogo](https://github.com/jean-morelle/DigitalAllianceTogo) — plateforme e-commerce (ASP.NET Core, PostgreSQL, MediatR)
