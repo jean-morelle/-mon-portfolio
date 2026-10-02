@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import photo from './images/portrait.jpg'
 import cv from './images/cv.pdf'
 import gkasShot from './images/gkas-group.jpg'
 import logo from './images/logo-mark.png'
-import digitalAllianceShot from './images/digitalalliance.jpg'
+import digitalAllianceShot from './images/DigitalAlliance.png'
+import collectPlusShot from './images/collectplus.png'
 import nunyFoodShot from './images/nunyfood.jpg'
 import emargementShot from './images/emargement.jpg'
 import './App.css'
@@ -72,14 +73,20 @@ const projects = [
     image: emargementShot,
     repo: repo('GkasGroupEmargement'),
   },
+  {
+    name: 'CollectPlus Togo',
+    type: 'Gestion des déchets',
+    desc: 'Service de gestion des déchets à Lomé : signalement de dépôts sauvages avec photo, jours de passage par quartier et suivi des demandes jusqu’à leur résolution.',
+    stack: ['Laravel', 'PHP', 'Blade', 'JavaScript'],
+    image: collectPlusShot,
+    repo: repo('Gestion-Dechets'),
+  },
 ]
 
 const timeline = [
   { years: '2024 – 2025', title: 'Licence Architecture Logicielle', place: 'ESGIS Avédji' },
   { years: '2022 – 2023', title: 'Informatique, Réseaux et Télécoms', place: 'ESGIS' },
-  { years: '2021 – 2022', title: '1re année IRT', place: 'ESGIS Kodjoviakopé' },
-  { years: '2020 – 2021', title: 'Baccalauréat A4', place: 'Lycée Sainte Catherine' },
-]
+  { years: '2021 – 2022', title: '1re année IRT', place: 'ESGIS Kodjoviakopé' },]
 
 const services = [
   {
@@ -117,6 +124,41 @@ function useActiveSection() {
   }, [])
 
   return active
+}
+
+function useCarousel() {
+  const trackRef = useRef(null)
+  const pausedRef = useRef(false)
+
+  const scroll = (dir) => {
+    const track = trackRef.current
+    if (!track) return
+    const card = track.querySelector('.project')
+    const step = card ? card.offsetWidth + 22 : track.clientWidth
+    const atStart = track.scrollLeft <= 4
+    const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4
+    if (dir > 0 && atEnd) track.scrollTo({ left: 0, behavior: 'smooth' })
+    else if (dir < 0 && atStart) track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' })
+    else track.scrollBy({ left: dir * step, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const id = setInterval(() => {
+      if (!pausedRef.current) scroll(1)
+    }, 4500)
+    return () => clearInterval(id)
+  }, [])
+
+  const pause = {
+    onMouseEnter: () => (pausedRef.current = true),
+    onMouseLeave: () => (pausedRef.current = false),
+    onFocus: () => (pausedRef.current = true),
+    onBlur: () => (pausedRef.current = false),
+    onTouchStart: () => (pausedRef.current = true),
+  }
+
+  return { trackRef, scroll, pause }
 }
 
 const roles = ['Back-end .NET', 'APIs REST', 'Clean Architecture', 'Full-stack React']
@@ -229,6 +271,7 @@ function App() {
   const [copied, setCopied] = useState(false)
   const active = useActiveSection()
   const typed = useTyping(roles)
+  const carousel = useCarousel()
   useReveal()
 
   useEffect(() => {
@@ -507,7 +550,16 @@ function App() {
             </div>
           </article>
 
-          <div className="projects-grid">
+          <div className="carousel" {...carousel.pause}>
+            <button
+              className="carousel-btn prev"
+              type="button"
+              aria-label="Projet précédent"
+              onClick={() => carousel.scroll(-1)}
+            >
+              ‹
+            </button>
+            <div className="projects-grid" ref={carousel.trackRef}>
             {projects.map((p) => (
               <article className="card project reveal" key={p.name}>
                 <a
@@ -545,6 +597,15 @@ function App() {
                 </a>
               </article>
             ))}
+            </div>
+            <button
+              className="carousel-btn next"
+              type="button"
+              aria-label="Projet suivant"
+              onClick={() => carousel.scroll(1)}
+            >
+              ›
+            </button>
           </div>
           <div className="projects-more">
             <a className="btn btn-ghost" href={GITHUB} target="_blank" rel="noreferrer">
