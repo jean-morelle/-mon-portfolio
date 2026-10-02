@@ -86,7 +86,8 @@ const projects = [
 const timeline = [
   { years: '2024 – 2025', title: 'Licence Architecture Logicielle', place: 'ESGIS Avédji' },
   { years: '2022 – 2023', title: 'Informatique, Réseaux et Télécoms', place: 'ESGIS' },
-  { years: '2021 – 2022', title: '1re année IRT', place: 'ESGIS Kodjoviakopé' },]
+  { years: '2021 – 2022', title: '1re année IRT', place: 'ESGIS Kodjoviakopé' },
+]
 
 const services = [
   {
@@ -222,7 +223,7 @@ const techCount = skills.reduce((sum, s) => sum + s.items.length, 0)
 const stats = [
   { value: 15, suffix: '', label: 'dépôts sur GitHub' },
   { value: techCount, suffix: '', label: 'technologies' },
-  { value: 4, suffix: ' ans', label: 'de formation en informatique' },
+  { value: timeline.length, suffix: ' ans', label: 'de formation en informatique' },
 ]
 
 function spotlight(e) {
