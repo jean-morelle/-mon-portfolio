@@ -28,14 +28,11 @@ const links = [
 
 const skills = [
   { group: 'Langages', items: ['C#', 'PHP', 'TypeScript', 'JavaScript', 'SQL'] },
-  {
-    group: 'Back-end',
-    items: ['ASP.NET Core Web API', 'EF Core', 'Laravel', 'MediatR', 'JWT', 'RBAC'],
-  },
-  { group: 'Architecture', items: ['Clean Architecture', 'Repository Pattern', 'REST', 'UML'] },
+  { group: 'Back-end', items: ['ASP.NET Core Web API', 'Laravel'] },
+  { group: 'Architecture', items: ['Repository Pattern'] },
   { group: 'Données', items: ['PostgreSQL', 'MySQL', 'SQL Server'] },
   { group: 'Front-end', items: ['React', 'Blade'] },
-  { group: 'Outils', items: ['Git', 'GitHub', 'Swagger', 'Visual Studio'] },
+  { group: 'Outils', items: ['Git', 'GitHub', 'Swagger', 'Visual Studio', 'UML'] },
 ]
 
 const repo = (name) => `${GITHUB}/${name}`
@@ -164,6 +161,153 @@ function useCarousel() {
 
 const roles = ['Back-end .NET', 'APIs REST', 'Clean Architecture', 'Full-stack React']
 
+// Logos officiels (tracés Simple Icons), affichés aux couleurs de chaque marque
+const brandIcons = {
+  gmail: {
+    color: '#EA4335',
+    d: 'M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z',
+  },
+  phone: {
+    color: 'var(--accent-ink)',
+    d: 'M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z',
+  },
+  whatsapp: {
+    color: '#25D366',
+    d: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z',
+  },
+  github: {
+    color: 'currentColor',
+    d: 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12',
+  },
+  linkedin: {
+    color: '#0A66C2',
+    d: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
+  },
+}
+
+const WA_SIZE = 54
+const WA_MARGIN = 22
+
+// Bulle WhatsApp déplaçable : on la glisse, elle se colle au bord le plus proche
+function WhatsAppBubble() {
+  const [pos, setPos] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem('wa-pos'))
+      if (saved && ['left', 'right'].includes(saved.side) && saved.ratio >= 0 && saved.ratio <= 1) {
+        return saved
+      }
+    } catch {
+      // stockage indisponible : position par défaut
+    }
+    return { side: 'left', ratio: 1 }
+  })
+  const [drag, setDrag] = useState(null)
+  const [hint, setHint] = useState(false)
+  const [, setViewport] = useState(0)
+  const start = useRef(null)
+  const moved = useRef(false)
+
+  useEffect(() => {
+    const onResize = () => setViewport((n) => n + 1)
+    window.addEventListener('resize', onResize)
+    const show = setTimeout(() => setHint(true), 3000)
+    const hide = setTimeout(() => setHint(false), 8000)
+    return () => {
+      window.removeEventListener('resize', onResize)
+      clearTimeout(show)
+      clearTimeout(hide)
+    }
+  }, [])
+
+  // À droite, on laisse de la place au bouton « remonter en haut »
+  const maxY = (side) =>
+    window.innerHeight - WA_SIZE - WA_MARGIN - (side === 'right' ? 56 : 0)
+  const rest = {
+    x: pos.side === 'left' ? WA_MARGIN : window.innerWidth - WA_SIZE - WA_MARGIN,
+    y: WA_MARGIN + pos.ratio * Math.max(0, maxY(pos.side) - WA_MARGIN),
+  }
+  const current = drag || rest
+  const clamp = (v, min, max) => Math.min(Math.max(v, min), max)
+
+  const onPointerDown = (e) => {
+    if (e.button !== 0) return
+    e.currentTarget.setPointerCapture(e.pointerId)
+    start.current = { px: e.clientX, py: e.clientY, x: current.x, y: current.y }
+    moved.current = false
+  }
+
+  const onPointerMove = (e) => {
+    const s = start.current
+    if (!s) return
+    const dx = e.clientX - s.px
+    const dy = e.clientY - s.py
+    if (!moved.current && Math.hypot(dx, dy) < 6) return
+    moved.current = true
+    setHint(false)
+    setDrag({
+      x: clamp(s.x + dx, 0, window.innerWidth - WA_SIZE),
+      y: clamp(s.y + dy, 0, window.innerHeight - WA_SIZE),
+    })
+  }
+
+  const onPointerUp = () => {
+    start.current = null
+    if (!drag) return
+    const side = drag.x + WA_SIZE / 2 < window.innerWidth / 2 ? 'left' : 'right'
+    const range = Math.max(1, maxY(side) - WA_MARGIN)
+    const next = { side, ratio: clamp((drag.y - WA_MARGIN) / range, 0, 1) }
+    setPos(next)
+    setDrag(null)
+    try {
+      localStorage.setItem('wa-pos', JSON.stringify(next))
+    } catch {
+      // stockage indisponible : la position reste valable pour la session
+    }
+  }
+
+  return (
+    <a
+      className={`wa-float wa-${pos.side} ${drag ? 'dragging' : ''} ${hint ? 'hint' : ''}`}
+      style={{ left: current.x, top: current.y }}
+      href={WHATSAPP}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Me contacter sur WhatsApp"
+      draggable={false}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onClick={(e) => {
+        // un glisser-déposer ne doit pas ouvrir WhatsApp
+        if (moved.current) {
+          e.preventDefault()
+          moved.current = false
+        }
+      }}
+    >
+      <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3Zm0 23.1c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4a10.4 10.4 0 0 1-1.6-5.5C5.3 9.8 10.1 5.1 16 5.1s10.7 4.7 10.7 10.5S21.9 26.1 16 26.1Zm5.9-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"
+        />
+      </svg>
+      <span className="wa-tip" aria-hidden="true">
+        Discutons sur WhatsApp
+      </span>
+    </a>
+  )
+}
+
+function BrandIcon({ name }) {
+  const { color, d } = brandIcons[name]
+  return (
+    <svg className="brand-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path fill={color} d={d} />
+    </svg>
+  )
+}
+
 function useTyping(words) {
   const [text, setText] = useState('')
   const [index, setIndex] = useState(0)
@@ -270,6 +414,43 @@ function App() {
     }
   })
   const [copied, setCopied] = useState(false)
+  const [formStatus, setFormStatus] = useState({ state: 'idle', text: '' })
+
+  const sendMessage = async (e) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const fields = Object.fromEntries(new FormData(form))
+    setFormStatus({ state: 'sending', text: '' })
+
+    // Sans API joignable (site statique en ligne), on retombe sur la messagerie du visiteur
+    const openMailClient = () => {
+      const subject = encodeURIComponent(`Contact portfolio — ${fields.name}`)
+      const body = encodeURIComponent(`${fields.message}\n\n${fields.name}\n${fields.email}`)
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
+      setFormStatus({ state: 'idle', text: '' })
+    }
+
+    let res
+    try {
+      res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fields),
+      })
+    } catch {
+      return openMailClient()
+    }
+
+    if (res.ok) {
+      form.reset()
+      return setFormStatus({ state: 'ok', text: 'Merci ! Votre message a bien été envoyé.' })
+    }
+    if (res.status === 400) {
+      const data = await res.json().catch(() => ({}))
+      return setFormStatus({ state: 'error', text: data.error || 'Formulaire invalide.' })
+    }
+    openMailClient()
+  }
   const active = useActiveSection()
   const typed = useTyping(roles)
   const carousel = useCarousel()
@@ -655,37 +836,40 @@ function App() {
                 sous 24 h.
               </p>
               <div className="contact-row">
-                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                <a className="contact-item" href={`mailto:${EMAIL}`}>
+                  <BrandIcon name="gmail" />
+                  {EMAIL}
+                </a>
                 <button className="copy-btn" type="button" onClick={copyEmail}>
                   {copied ? 'Copié ✓' : 'Copier'}
                 </button>
               </div>
-              <a href="tel:+22890570424">+228 90 57 04 24</a>
-              <a className="whatsapp" href={WHATSAPP} target="_blank" rel="noreferrer">
+              <a className="contact-item" href="tel:+22890570424">
+                <BrandIcon name="phone" />
+                +228 90 57 04 24
+              </a>
+              <a
+                className="contact-item whatsapp"
+                href={WHATSAPP}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <BrandIcon name="whatsapp" />
                 WhatsApp : +228 96 19 09 28
               </a>
-              <a href={GITHUB} target="_blank" rel="noreferrer">
+              <a className="contact-item" href={GITHUB} target="_blank" rel="noreferrer">
+                <BrandIcon name="github" />
                 GitHub — jean-morelle
               </a>
-              <a href={LINKEDIN} target="_blank" rel="noreferrer">
+              <a className="contact-item" href={LINKEDIN} target="_blank" rel="noreferrer">
+                <BrandIcon name="linkedin" />
                 LinkedIn — Jean-Morelle KOUDORO
               </a>
               <a className="btn btn-primary" href={cv} download={CV_NAME}>
                 Télécharger le CV
               </a>
             </div>
-            <form
-              className="card reveal"
-              onSubmit={(e) => {
-                e.preventDefault()
-                const data = new FormData(e.currentTarget)
-                const subject = encodeURIComponent(`Contact portfolio — ${data.get('name')}`)
-                const body = encodeURIComponent(
-                  `${data.get('message')}\n\n${data.get('name')}\n${data.get('email')}`,
-                )
-                window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
-              }}
-            >
+            <form className="card reveal" onSubmit={sendMessage}>
               <label>
                 Nom
                 <input name="name" autoComplete="name" required />
@@ -698,9 +882,18 @@ function App() {
                 Message
                 <textarea name="message" required />
               </label>
-              <button className="btn btn-primary" type="submit">
-                Envoyer
+              <button
+                className="btn btn-primary"
+                type="submit"
+                disabled={formStatus.state === 'sending'}
+              >
+                {formStatus.state === 'sending' ? 'Envoi…' : 'Envoyer'}
               </button>
+              {formStatus.text && (
+                <p className={`form-status ${formStatus.state}`} role="status">
+                  {formStatus.text}
+                </p>
+              )}
             </form>
           </div>
         </section>
@@ -723,20 +916,7 @@ function App() {
         </span>
       </footer>
 
-      <a
-        className="wa-float"
-        href={WHATSAPP}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Me contacter sur WhatsApp"
-      >
-        <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
-          <path
-            fill="currentColor"
-            d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3Zm0 23.1c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4a10.4 10.4 0 0 1-1.6-5.5C5.3 9.8 10.1 5.1 16 5.1s10.7 4.7 10.7 10.5S21.9 26.1 16 26.1Zm5.9-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.4 1.4.6 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4Z"
-          />
-        </svg>
-      </a>
+      <WhatsAppBubble />
 
       <a
         className={`to-top ${scrolled ? 'show' : ''}`}

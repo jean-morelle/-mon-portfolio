@@ -1059,6 +1059,16 @@ main,
   margin-top: 8px;
 }
 
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  flex-shrink: 0;
+}
+
 .contact-row {
   display: flex;
   align-items: center;
@@ -1118,6 +1128,103 @@ textarea {
   resize: vertical;
 }
 
+.form-status {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-status.ok {
+  color: var(--live);
+}
+
+.form-status.error {
+  color: #ef4444;
+}
+
+/* Page admin */
+
+.admin {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 16px;
+  min-height: 100vh;
+}
+
+.admin h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.admin-login {
+  display: grid;
+  gap: 16px;
+  max-width: 380px;
+  margin: 12vh auto 0;
+}
+
+.admin-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-empty {
+  color: var(--muted);
+}
+
+.admin-list {
+  display: grid;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.admin-msg p {
+  margin: 12px 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.admin-msg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+
+.admin-msg-head a {
+  color: var(--accent-ink);
+  overflow-wrap: anywhere;
+}
+
+.admin-msg-head time {
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.admin-delete {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: #ef4444;
+  cursor: pointer;
+}
+
 /* Footer */
 
 .footer {
@@ -1162,8 +1269,6 @@ textarea {
 
 .wa-float {
   position: fixed;
-  left: 22px;
-  bottom: 22px;
   z-index: 15;
   display: grid;
   place-items: center;
@@ -1173,12 +1278,100 @@ textarea {
   background: #25d366;
   color: #fff;
   box-shadow: 0 10px 24px var(--shadow);
-  transition: transform 0.2s;
-  animation: wa-ping 2.6s ease-out infinite;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  /* retour élastique vers le bord quand on lâche la bulle */
+  transition:
+    left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    top 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    scale 0.2s;
+  animation:
+    wa-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+    wa-ping 2.6s ease-out 0.6s infinite;
+}
+
+.wa-float svg {
+  animation: wa-wiggle 5s ease-in-out 1.5s infinite;
 }
 
 .wa-float:hover {
-  transform: scale(1.08);
+  scale: 1.08;
+}
+
+.wa-float.dragging {
+  cursor: grabbing;
+  scale: 1.15;
+  transition: scale 0.2s;
+}
+
+.wa-float.dragging svg {
+  animation: none;
+}
+
+.wa-tip {
+  position: absolute;
+  top: 50%;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--float-bg);
+  color: var(--text);
+  border: 1px solid var(--line);
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) scale(0.9);
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.wa-left .wa-tip {
+  left: calc(100% + 12px);
+  transform-origin: left center;
+}
+
+.wa-right .wa-tip {
+  right: calc(100% + 12px);
+  transform-origin: right center;
+}
+
+.wa-float:hover:not(.dragging) .wa-tip,
+.wa-float.hint:not(.dragging) .wa-tip {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+@keyframes wa-pop {
+  from {
+    transform: scale(0) rotate(-120deg);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* petit « coucou » de l'icône toutes les 5 secondes */
+@keyframes wa-wiggle {
+  0%,
+  84%,
+  100% {
+    transform: rotate(0);
+  }
+  87% {
+    transform: rotate(-16deg);
+  }
+  90% {
+    transform: rotate(14deg);
+  }
+  93% {
+    transform: rotate(-10deg);
+  }
+  96% {
+    transform: rotate(6deg);
+  }
 }
 
 @keyframes wa-ping {
